@@ -29,6 +29,9 @@ $(document).ready(function(){
                    '<td>'+ MisItems[i].email +'</td>'+
                 '<td>'+
                 '<button id="btneditar" class="btn btn-primary" onclick="CargarPasajero('+ MisItems[i].codigo_pasajero +')">Editar</button>' +
+                '<td>'+
+                '<button id="btneliminar" class="btn btn-dark" onclick="EliminarPasajero('+ MisItems[i].codigo_pasajero +')">Eliminar</button>' +
+                '</td>'+
                 '</td>' + 
                '</tr>';
                $('#DatosPasajeros').html(Valores);
@@ -94,4 +97,60 @@ function CargarPasajero(p_codigo_pasajero){
     }
    }
    );
+}
+
+function ActualizarPasajero(p_codigo_pasajero){
+    var datospasajeros ={
+        codigo_pasajero :$('#CODPASAJERO').val(),
+        nombres :$('#NOMBRES').val(),
+        apellidos :$('#APELLIDOS').val(),
+        fecha_registro :$('#FECHAREGISTRO').val(),
+        nacionalidad :$('#NACIONALIDAD').val(),
+        numero_telefonico :$('#NUMTELEFONICO').val(),
+        email :$('#EMAIL').val()
+    };
+    var datospasajerosjson = JSON.stringify(datospasajeros);
+   //alert(datospasajerosjson);
+    $.ajax({
+        url : UrlApiActualizar,
+        type : 'PUT',
+        data : datospasajerosjson,
+        datatype :'JSON',
+        contentType : 'application/json',
+        success : function(response){
+            console.log(response);
+            alert('Pasajero Actualizado de Forma Correcta');
+           
+        },
+        error : function(textStatus, errorThrown){
+            alert('Error ' + textStatus + errorThrown);
+        }
+    }
+    );
+    //alert('');
+}
+
+function EliminarPasajero(p_codigo_pasajero){
+    var datospasajeros ={
+        codigo_pasajero : p_codigo_pasajero,
+    };
+    var datospasajerosjson = JSON.stringify(datospasajeros);
+   //alert(datospasajerosjson);
+    $.ajax({
+        url : UrlApiEliminar,
+        type : 'DELETE',
+        data : datospasajerosjson,
+        datatype :'JSON',
+        contentType : 'application/json',
+        success : function(response){
+            console.log(response);
+            alert('Pasajero Eliminado de Forma Correcta');
+            CargarPasajeros();
+        },
+        error : function(textStatus, errorThrown){
+            alert('Error ' + textStatus + errorThrown);
+        }
+    }
+    );
+    //alert('');
 }
