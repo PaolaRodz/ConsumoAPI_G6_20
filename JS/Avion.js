@@ -1,5 +1,6 @@
 var UrlApiGetAll = 'http://localhost:5006/avion/getall';
 var UrlApiInsert= 'http://localhost:5006/avion/insertar/:num_avion';
+var UrlApiGetUno= 'http://localhost:5006/avion/getOne/:num_avion';
 
 $(document).ready(function(){
     CargarAvion();
@@ -25,6 +26,9 @@ function CargarAvion(){
                  '<td>'+ MisItems [i].fecha_primer_avion +'</td>'+
                  '<td>'+ MisItems [i].pais_construccion +'</td>'+
                  '<td>'+ MisItems [i].cant_vuelos +'</td>'+
+                 '<td>'+
+                 '<button id="btneditar" class="btn btn-info" onclick="CargarRegistro('+MisItems [i].num_avion+')">Editar</button>'+
+                 '</td>'+
                 '</tr>';
 
                 $('#RegistroAviones').html(Valores);
@@ -66,5 +70,46 @@ alert('Error: '+ textError + errorThrown);
 }
 
 });
+
+}
+
+function CargarRegistro (p_num_avion){
+
+    var datosavion={
+
+        num_avion: p_num_avion
+    };
+
+    var datosavionjson =JSON.stringify(datosavion);
+
+    $.ajax({
+        url: UrlApiGetUno,
+        type: 'POST',
+        data: datosavionjson,
+        datatype: 'JSON',
+        contentType: 'application/json',
+        success : function(response){
+            var MisItems = response;
+            for(i=0; i < MisItems.length; i++){
+                $('#num_avion').val(MisItems[i].num_avion)
+                $('#tipo_avion').val(MisItems[i].tipo_avion)
+                $('#horasvuelo').val(MisItems[i].horas_vuelo)
+                $('#cap_pasajeros').val(MisItems[i].cap_pasajeros)
+                $('#fechaprimer_avion').val(MisItems[i].fecha_primer_avion)
+                $('#paisconstruccion').val(MisItems[i].pais_construccion)
+                $('#cant_vuelos').val(MisItems[i].cant_vuelos)
+                var btnactualizar= '<input type="submit" class="btn btn-outline-danger"'+
+                 'id="btnagregar"onclick="ActualizarAvion('+ MisItems[i].num_avion+')" value="Actualizar Registro" >';
+                $('#btnagregaravion').html(btnactualizar);
+
+            }
+
+
+        }
+    })
+
+}
+
+function ActualizarAvion(p_num_avion){
 
 }
