@@ -1,6 +1,9 @@
 var UrlApiGetAll = 'http://localhost:5006/vuelo/getall';
 var UrlApiInsert = 'http://localhost:5006/vuelo/insertar/:codigo_de_vuelo';
 var UrlApiGetUno = 'http://localhost:5006/vuelo/getOne/:codigo_de_vuelo';
+var UrlApiUpdate = 'http://localhost:5006/vuelo/actualizar/:codigo_de_vuelo';
+var UrlApiDelete = 'http://localhost:5006/vuelo/eliminar/:codigo_de_vuelo';
+
 $(document).ready(function(){
     CargarVuelos();
 });
@@ -26,6 +29,9 @@ function CargarVuelos(){
                     '<td>'+ MisItems[i].distancia_km +'</td>'+
                     '<td> ' +
                     '<button id="btneditar" class="btn btn-primary" onclick="CargarVuelo('+ MisItems[i].codigo_de_vuelo +')">Editar</button>'+
+                    '</td>'+
+                    '<td>'+
+                    '<button id="btneliminar" class="btn btn-danger" onclick="EliminarVuelo('+ MisItems[i].codigo_de_vuelo +')">Eliminar</button>'+
                     '</td>'+
                     '</tr>';
                 $('#DatosVuelos').html(Valores);
@@ -94,5 +100,55 @@ function CargarVuelo(p_codigo_de_vuelo){
 }
 
 function ActualizarVuelo(p_codigo_de_vuelo){
+    var datosvuelo={
+        codigo_de_vuelo : $('#CODVUELO').val(),
+        ciudad_origen : $('#CIUORIGEN').val(),
+        ciudad_destino : $('#CIUDESTINO').val(),
+        fecha_de_vuelo : $('#FECHAVUELO').val(),
+        cantidad_de_pasajeros : $('#CANTPASAJEROS').val(),
+        tipo_avion : $('#TIPOAVION').val(),
+        distancia_km : $('#DISTANCIAKM').val()
 
+    };
+
+    var datosvuelojson = JSON.stringify(datosvuelo);
+
+    $.ajax({
+        url: UrlApiUpdate,
+        type: 'PUT',
+        data: datosvuelojson,
+        datatype: 'JSON',
+        contentType: 'application/json',
+        success : function(response){
+            console.log(response);
+            alert('Vuelo Actualizado Correctamente');
+        },
+        error: function(textStatus, errorThrown){
+            alert('error ' + textStatus+ errorThrown);
+        }
+    });
+}
+
+function EliminarVuelo(p_codigo_de_vuelo){
+    var datosvuelo={
+        codigo_de_vuelo : p_codigo_de_vuelo,
+    };
+
+    var datosvuelojson =JSON.stringify(datosvuelo);
+
+    $.ajax({
+        url: UrlApiDelete,
+        type: 'DELETE',
+        data: datosvuelojson,
+        datatype: 'JSON',
+        contentType: 'application/json',
+        success : function(response){
+            console.log(response);
+            alert('Vuelo Eliminado Correctamente');
+            $('#Miformulario').submit();
+        },
+        error: function(textStatus, errorThrown){
+            alert('Error ' + textStatus+ errorThrown);
+        }
+    })
 }
