@@ -5,9 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reserva</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
-    rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" 
-    crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="JS/Reserva.js"></script>
 </head>
@@ -22,7 +20,7 @@
                 </div>
                 <div class="box-body">
                     <div class="table table-responsive">
-                        <table class="table table-dark table-hover">
+                        <table class="table table-secondary table-hover">
                             <thead>
                                 <tr>
                                     <th>Numero de Reservación</th>
@@ -43,10 +41,9 @@
             </div>
         </div>
 
-
-        <div id="Formulario" class="Formulario mt6">
+        <div class="Formulario" >
             <div class="row">
-                <div>
+                <div class="col-6">
                     <h3>
                         Agregar Reserva
                     </h3>
@@ -54,33 +51,35 @@
             </div>
             <div class="col-12">
                 <form id="Miformulario" class="Reserva">
-                    <label for="">Numero de Reservación</label>
+                    <label for=""><b>Numero de Reservación</b></label>
                     <input type="text" id="NumerodeReservacion" class="form-control" placeholder="Ingrese el Numero de Reservación">
-                    <label for="">Código de Vuelo</label>
+                    <label for=""><b>Código de Vuelo</b></label>
                     <input type="text" id="CodigodeVuelo" class="form-control" placeholder="Ingrese el Código de Vuelo">
-                    <label for="">Código de Pasajero</label>
+                    <label for=""><b>Código de Pasajero</b></label>
                     <input type="text" id="CodigodePasajero" class="form-control" placeholder="Ingrese el Código de Pasajero">
-                    <label for="">Nombre Pasajero</label>
+                    <label for=""><b>Nombre Pasajero</b></label>
                     <input type="text" id="NombrePasajero" class="form-control" placeholder="Ingrese el Nombre de Pasajero">
-                    <label for="">Ciudad Destino</label>
+                    <label for=""><b>Ciudad Destino</b></label>
                     <input type="text" id="CiudadDestino" class="form-control" placeholder="Ingrese la Ciudad de Destino">
-                    <label for="">Fecha de Vuelo</label>
+                    <label for=""><b>Fecha de Vuelo</b></label>
                     <input type="date"id="FechadeVuelo" class="form-control" placeholder="Ingrese la Fecha de Vuelo">
-                    <label for="">Precio Vuelo</label>
+                    <label for=""><b>Precio Vuelo</b></label>
                     <input type="text" id="PrecioVuelo" class="form-control" placeholder="Ingrese el Precio de Vuelo">
                     <hr>
-                    <div id="btagregarreserva">
-                        <input type="button" value="Agregar Reserva" class="btn btn-outline-success" id="btnagregar"
+                    <div id="btnagregarreserva">
+                        <input type="submit" id="btnagregar" value="Agregar Reserva" class="btn btn-outline-success" 
                         onclick="AgregarReserva()">
-
                     </div>
+                    <hr>
+                        <div class="d-grid gap-2">
+                            <a href="Home.html" class="btn btn-outline-primary" type="button"><b>Volver a Inicio</b></a>
+                          </div>
+                   <hr>
                 </form>
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" 
-     integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> 
 </body>
-
 </html>
