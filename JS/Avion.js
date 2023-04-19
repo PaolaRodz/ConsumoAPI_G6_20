@@ -1,6 +1,8 @@
 var UrlApiGetAll = 'http://localhost:5006/avion/getall';
 var UrlApiInsert= 'http://localhost:5006/avion/insertar/:num_avion';
 var UrlApiGetUno= 'http://localhost:5006/avion/getOne/:num_avion';
+var UrlApiUpdate= 'http://localhost:5006/avion/actualizar/:num_avion';
+var UrlApiDelete= 'http://localhost:5006/avion/eliminar/:num_avion';
 
 $(document).ready(function(){
     CargarAvion();
@@ -28,6 +30,9 @@ function CargarAvion(){
                  '<td>'+ MisItems [i].cant_vuelos +'</td>'+
                  '<td>'+
                  '<button id="btneditar" class="btn btn-info" onclick="CargarRegistro('+MisItems [i].num_avion+')">Editar</button>'+
+                 '</td>'+
+                 '<td>'+
+                 '<button id="btneliminar" class="btn btn-info" onclick="EliminarRegistro('+MisItems [i].num_avion+')">Eliminar</button>'+
                  '</td>'+
                 '</tr>';
 
@@ -112,4 +117,55 @@ function CargarRegistro (p_num_avion){
 
 function ActualizarAvion(p_num_avion){
 
+    var datosavion={
+        num_avion: $('#num_avion').val(),
+        tipo_avion: $('#tipo_avion').val(),
+        horas_vuelo: $('#horasvuelo').val(),
+        cap_pasajeros: $('#cap_pasajeros').val(),
+        fecha_primer_avion: $('#fechaprimer_avion').val(),
+        pais_construccion: $('#paisconstruccion').val(),
+        cant_vuelos: $('#cant_vuelos').val()
+
+    };
+    var datosavionjson =JSON.stringify(datosavion);
+
+    $.ajax({
+        url: UrlApiUpdate,
+        type: 'PUT',
+        data: datosavionjson,
+        datatype: 'JSON',
+        contentType: 'application/json',
+        success : function(response){
+            console.log(response);
+            alert('Registro Actualizado Correctamente');
+        },
+        error: function(textStatus, errorThrown){
+            alert('error ' + textStatus+ errorThrown);
+        }
+    });
+
+}
+
+function EliminarRegistro(p_num_avion){
+    var datosavion={
+        num_avion: p_num_avion,
+    };
+
+    var datosavionjson =JSON.stringify(datosavion);
+
+    $.ajax({
+        url: UrlApiDelete,
+        type: 'DELETE',
+        data: datosavionjson,
+        datatype: 'JSON',
+        contentType: 'application/json',
+        success : function(response){
+            console.log(response);
+            alert('Registro Eliminado Correctamente');
+            CargarAvion();
+        },
+        error: function(textStatus, errorThrown){
+            alert('Error ' + textStatus+ errorThrown);
+        }
+    })
 }
