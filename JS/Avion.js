@@ -103,7 +103,7 @@ function CargarRegistro (p_num_avion){
                 $('#fechaprimer_avion').val(MisItems[i].fecha_primer_avion)
                 $('#paisconstruccion').val(MisItems[i].pais_construccion)
                 $('#cant_vuelos').val(MisItems[i].cant_vuelos)
-                var btnactualizar= '<input type="submit" class="btn btn-outline-danger"'+
+                var btnactualizar= '<input type="button" class="btn btn-outline-danger"'+
                  'id="btnagregar"onclick="ActualizarAvion('+ MisItems[i].num_avion+')" value="Actualizar Registro" >';
                 $('#btnagregaravion').html(btnactualizar);
 
@@ -138,6 +138,7 @@ function ActualizarAvion(p_num_avion){
         success : function(response){
             console.log(response);
             alert('Registro Actualizado Correctamente');
+            $('#Miformulario').submit();
         },
         error: function(textStatus, errorThrown){
             alert('error ' + textStatus+ errorThrown);
