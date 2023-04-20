@@ -29,17 +29,14 @@ function CargarPasajero(){
                  '<td>'+ MisItems [i].numero_telefonico +'</td>'+
                  '<td>'+ MisItems [i].email +'</td>'+
                  '<td>'+
-                 '<button id="btneditar" class="btn btn-info" onclick="CargarRegistro('+MisItems [i].codigo_pasajero+')">Editar</button>'+
+                 '<button id="btneditar" class="btn btn-info" onclick="CargarRegistro('+ MisItems [i].codigo_pasajero +')">Editar</button>'+
                  '</td>'+
                  '<td>'+
-                 '<button id="btneliminar" class="btn btn-dark" onclick="EliminarRegistro('+MisItems [i].codigo_pasajero+')">Eliminar</button>'+
+                 '<button id="btneliminar" class="btn btn-dark" onclick="EliminarRegistro('+ MisItems[i].codigo_pasajero +')">Eliminar</button>'+
                  '</td>'+
                 '</tr>';
-
                 $('#RegistroPasajeros').html(Valores);
-
-
-                
+  
             } 
         }
     });
@@ -47,19 +44,19 @@ function CargarPasajero(){
 
 function AgregarPasajero(){
 var datospasajeros={
-    codigo_pasajero: $('#codigo_pasajero').val(),
-    nombres: $('#nombres').val(),
-    apellidos: $('#apellidos').val(),
-    fecha_registro: $('#fecha_registro').val(),
-    nacionalidad: $('#nacionalidad').val(),
-    numero_telefonico: $('#numero_telefonico').val(),
-    email: $('#email').val()
+    codigo_pasajero: $('#CodigoPasajero').val(),
+    nombres: $('#Nombres').val(),
+    apellidos: $('#Apellidos').val(),
+    fecha_registro: $('#FechaRegistro').val(),
+    nacionalidad: $('#Nacionalidad').val(),
+    numero_telefonico: $('#NumeroTelefonico').val(),
+    email: $('#Email').val()
 };
 
 var datospasajerosjson =JSON.stringify(datospasajeros);
 //alert(datospasajerosjson);
 
-$.ajax({
+$.ajax({    
 url: UrlApiInsert,
 type: 'POST',
 data: datospasajerosjson,
@@ -68,17 +65,16 @@ contentType: 'application/json',
 success: function(response){
     alert('Pasajero ingresado de forma correcta');
     $('#Miformulario').submit();
-
-},
-error: function(textError, errorThrown){
-alert('Error: '+ textError + errorThrown);
+  },
+  error: function(textStatus, errorThrown){
+  alert('Error: '+ textStatus + errorThrown);
+  }
+}
+);
+//alert('');
 }
 
-});
-
-}
-
-function CargarRegistro (p_codigo_pasajero){
+function CargarRegistro(p_codigo_pasajero){
 
     var datospasajeros={
 
@@ -86,6 +82,7 @@ function CargarRegistro (p_codigo_pasajero){
     };
 
     var datospasajerosjson =JSON.stringify(datospasajeros);
+    //alert(datospasajerosjson);
 
     $.ajax({
         url: UrlApiGetUno,
@@ -96,35 +93,32 @@ function CargarRegistro (p_codigo_pasajero){
         success : function(response){
             var MisItems = response;
             for(i=0; i < MisItems.length; i++){
-                $('#codigo_pasajero').val(MisItems[i].codigo_pasajero)
-                $('#nombres').val(MisItems[i].nombres)
-                $('#apellidos').val(MisItems[i].apellidos)
-                $('#fecha_registro').val(MisItems[i].fecha_registro)
-                $('#nacionalidad').val(MisItems[i].nacionalidad)
-                $('#numero_telefonico').val(MisItems[i].numero_telefonico)
-                $('#email').val(MisItems[i].email)
+                $('#CodigoPasajero').val(MisItems [i].codigo_pasajero);
+                $('#Nombres').val(MisItems[i].nombres);
+                $('#Apellidos').val(MisItems[i].apellidos);
+                $('#FechaRegistro').val(MisItems[i].fecha_registro);
+                $('#Nacionalidad').val(MisItems[i].nacionalidad);
+                $('#NumeroTelefonico').val(MisItems[i].numero_telefonico);
+                $('#Email').val(MisItems[i].email);
                 var btnactualizar= '<input type="submit" class="btn btn-outline-danger"'+
-                 'id="btnagregar"onclick="ActualizarPasajero('+ MisItems[i].codigo_pasajero+')" value="Actualizar Pasajero" >';
-                $('#btnagregarpasajero').html(btnactualizar);
+                 'id="btnagregar" onclick="ActualizarPasajero('+ MisItems[i].codigo_pasajero +')" value="Actualizar Pasajero" >';
+                $('#btnagregarpasajero').html(btnactualizar)
 
             }
-
-
         }
-    })
-
+    });
 }
 
 function ActualizarPasajero(p_codigo_pasajero){
 
     var datospasajeros={
-        codigo_pasajero: $('#codigo_pasajero').val(),
-        nombres: $('nombres').val(),
-        apellidos: $('#apellidos').val(),
-        fecha_registro: $('#fecha_registro').val(),
-        nacionalidad: $('#nacionalidad').val(),
-        numero_telefonico: $('#numero_telefonico').val(),
-        email: $('#email').val()
+        codigo_pasajero: $('#CodigoPasajero').val(),
+        nombres: $('#Nombres').val(),
+        apellidos: $('#Apellidos').val(),
+        fecha_registro: $('#FechaRegistro').val(),
+        nacionalidad: $('#Nacionalidad').val(),
+        numero_telefonico: $('#NumeroTelefonico').val(),
+        email: $('#Email').val()
 
     };
     var datospasajerosjson =JSON.stringify(datospasajeros);
@@ -138,11 +132,12 @@ function ActualizarPasajero(p_codigo_pasajero){
         success : function(response){
             console.log(response);
             alert('Pasajero actualizado de forma correcta');
+            $('#Miformulario').submit();
         },
         error: function(textStatus, errorThrown){
             alert('error ' + textStatus+ errorThrown);
         }
-    });
+    })
 
 }
 
@@ -162,7 +157,7 @@ function EliminarRegistro(p_codigo_pasajero){
         success : function(response){
             console.log(response);
             alert('Pasajero Eliminado de Forma Correcta');
-            CargarPasajero();
+            $('#Miformulario').submit();
         },
         error: function(textStatus, errorThrown){
             alert('Error ' + textStatus+ errorThrown);
