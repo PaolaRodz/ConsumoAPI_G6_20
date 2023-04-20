@@ -28,10 +28,10 @@ function CargarVuelos(){
                     '<td>'+ MisItems[i].tipo_avion +'</td>'+
                     '<td>'+ MisItems[i].distancia_km +'</td>'+
                     '<td> ' +
-                    '<button id="btneditar" class="btn btn-primary" onclick="CargarVuelo('+ MisItems[i].codigo_de_vuelo +')">Editar</button>'+
+                    '<button id="btneditar" class="btn btn-outline-primary" onclick="CargarVuelo('+ MisItems[i].codigo_de_vuelo +')"><b>Editar</b></button>'+
                     '</td>'+
                     '<td>'+
-                    '<button id="btneliminar" class="btn btn-danger" onclick="EliminarVuelo('+ MisItems[i].codigo_de_vuelo +')">Eliminar</button>'+
+                    '<button id="btneliminar" class="btn btn-outline-danger" onclick="EliminarVuelo('+ MisItems[i].codigo_de_vuelo +')"><b>Eliminar</b></button>'+
                     '</td>'+
                     '</tr>';
                 $('#DatosVuelos').html(Valores);
@@ -59,7 +59,7 @@ function AgregarVuelo(){
         datatype: 'JSON',
         contentType: 'application/json',
         success: function(response){
-            alert('Vuelo Ingresado de Forma Correcta');
+            alert('Vuelo ingresado correctamente!!');
             $('#Miformulario').submit();
         },
         error : function(textError, errorThrown){
@@ -74,7 +74,7 @@ function CargarVuelo(p_codigo_de_vuelo){
     };
 
     var datosvuelojson = JSON.stringify(datosvuelo);
-
+    
     $.ajax({
         url : UrlApiGetUno,
         type: 'POST',
@@ -91,9 +91,10 @@ function CargarVuelo(p_codigo_de_vuelo){
                 $('#CANTPASAJEROS').val(MisItems[i].cantidad_de_pasajeros);
                 $('#TIPOAVION').val(MisItems[i].tipo_avion);
                 $('#DISTANCIAKM').val(MisItems[i].distancia_km);
-                var btnactualizar = '<input type="submit" class="btn btn-primary" ' + 
+                var btnactualizar = '<input type="button" class="btn btn-primary" ' + 
                 'id="btnagregar" onclick="ActualizarVuelo(' + MisItems[i].codigo_de_vuelo +')" value="Actalizar Vuelo" >'; 
                 $('#btnagregarvuelo').html(btnactualizar);
+                
             }
         }
     });
@@ -121,7 +122,8 @@ function ActualizarVuelo(p_codigo_de_vuelo){
         contentType: 'application/json',
         success : function(response){
             console.log(response);
-            alert('Vuelo Actualizado Correctamente');
+            alert('Vuelo actualizado correctamente!!');
+            $('#Miformulario').submit();
         },
         error: function(textStatus, errorThrown){
             alert('error ' + textStatus+ errorThrown);
@@ -144,7 +146,7 @@ function EliminarVuelo(p_codigo_de_vuelo){
         contentType: 'application/json',
         success : function(response){
             console.log(response);
-            alert('Vuelo Eliminado Correctamente');
+            alert('Vuelo eliminado correctamente!!');
             $('#Miformulario').submit();
         },
         error: function(textStatus, errorThrown){
