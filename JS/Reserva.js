@@ -93,7 +93,7 @@ function CargarReserva(p_numero_de_reservacion){
             $('#CiudadDestino').val(MisItems[i].ciudad_destino);
             $('#FechadeVuelo').val(MisItems[i].fecha_de_vuelo);
             $('#PrecioVuelo').val(MisItems[i].precio_vuelo);
-            var btnactualizar = '<input type="submit" class="btn btn-outline-warning" ' +
+            var btnactualizar = '<input type="button" class="btn btn-outline-warning" ' +
             'id="btnagregar" onclick="ActualizarReserva('+ MisItems[i].numero_de_reservacion +')" value="Actualizar Reserva" >';
            $('#btnagregarreserva').html(btnactualizar)
         }
@@ -124,6 +124,7 @@ function ActualizarReserva(p_numero_de_reservacion){
         success : function(response){
             console.log(response);
             alert('Reserva Actualizado Correctamente');
+            $('#Miformulario').submit();
         },
         error: function(textStatus, errorThrown){
             alert('error ' + textStatus+ errorThrown);
@@ -147,10 +148,10 @@ function EliminarReserva(p_numero_de_reservacion){
         success : function(response){
             console.log(response);
             alert('Reserva Eliminada Correctamente');
-            $('#Miformulario').submit();
+            CargarReservas();
         },
         error: function(textStatus, errorThrown){
             alert('Error ' + textStatus+ errorThrown);
         }
-    })
+    });
 }

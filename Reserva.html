@@ -10,6 +10,15 @@
     <script src="JS/Reserva.js"></script>
 </head>
 <body >
+    <style>
+        body{
+          background-color: black;
+         
+        }
+        h3, label{
+            color: white;
+        }
+      </style>
     <div class="container">
         <div class="consulta mt-6">
             <div class="row">
@@ -67,7 +76,7 @@
                     <input type="text" id="PrecioVuelo" class="form-control" placeholder="Ingrese el Precio de Vuelo">
                     <hr>
                     <div id="btnagregarreserva">
-                        <input type="submit" id="btnagregar" value="Agregar Reserva" class="btn btn-outline-success" 
+                        <input type="button" id="btnagregar" value="Agregar Reserva" class="btn btn-outline-success" 
                         onclick="AgregarReserva()">
                     </div>
                     <hr>
