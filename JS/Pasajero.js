@@ -100,7 +100,7 @@ function CargarRegistro(p_codigo_pasajero){
                 $('#Nacionalidad').val(MisItems[i].nacionalidad);
                 $('#NumeroTelefonico').val(MisItems[i].numero_telefonico);
                 $('#Email').val(MisItems[i].email);
-                var btnactualizar= '<input type="submit" class="btn btn-outline-danger"'+
+                var btnactualizar= '<input type="button" class="btn btn-outline-danger"'+
                  'id="btnagregar" onclick="ActualizarPasajero('+ MisItems[i].codigo_pasajero +')" value="Actualizar Pasajero" >';
                 $('#btnagregarpasajero').html(btnactualizar)
 
